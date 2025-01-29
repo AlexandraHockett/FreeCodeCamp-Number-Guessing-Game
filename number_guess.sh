@@ -2,7 +2,7 @@
 
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
-echo "Enter your username:"
+ECHO_COMMAND= "Enter your username:"
 read username_input
 
 # Escape single quotes in username
@@ -25,7 +25,7 @@ fi
 secret_number=$(( RANDOM % 1000 + 1 ))
 number_of_guesses=0
 
-echo "Guess the secret number between 1 and 1000:"
+ECHO_COMMAND= "Guess the secret number between 1 and 1000:"
 
 # Game loop
 while true; do
@@ -51,4 +51,4 @@ done
 # Game over, update stats
 $PSQL "UPDATE users SET games_played = games_played + 1, best_game = CASE WHEN best_game IS NULL OR $number_of_guesses < best_game THEN $number_of_guesses ELSE best_game END WHERE username = '$escaped_username'" >/dev/null
 
-echo "You guessed it in $number_of_guesses tries. The secret number was $secret_number. Nice job!"
+ECHO_COMMAND= "You guessed it in $number_of_guesses tries. The secret number was $secret_number. Nice job!"
